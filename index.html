@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <script>
+        const rock = "rock";
+        const paper = "paper";
+        const scissors = "scissors";
+        const PlayerWonMessage = "Player wins";
+        const ComputerWonMessage = "Computer wins";
+
+        function computerPlay() {
+            move = Math.floor(Math.random() * 2) + 1;
+            if (move === 1) return rock;
+            if (move === 2) return paper;
+            if (move === 3) return scissors;
+        }
+
+        function play(computer, player) {
+            if (computer === player) return "Tie";
+
+            if (computer === rock) {
+                if (player === paper) return PlayerWonMessage;
+                if (player === scissors) return ComputerWonMessage;
+            }
+
+            if (computer === paper) {
+                if (player === rock) return ComputerWonMessage;
+                if (player === scissors) return PlayerWonMessage;
+            }
+
+            if (computer === scissors) {
+                if (player === rock) return PlayerWonMessage;
+                if (player === paper) return ComputerWonMessage;
+            }
+        }
+
+        const player = prompt("Enter Rock, Paper, or Scissors").toLowerCase();
+
+        function game() {
+            let computerWins = 0;
+            let playerWins = 0;
+            for (i = 0; i < 5; i++) {
+                const computer = computerPlay();
+                console.log("Game " + (i + 1));
+                console.log("Player chose " + player);
+                console.log("Computer chose " + computer);
+                let result = play(computer, player);
+                console.log(result);
+                console.log("------");
+                if (result === PlayerWonMessage) playerWins++;
+                if (result === ComputerWonMessage) computerWins++;
+            }
+
+            console.log("Computer won " + computerWins + " games");
+            console.log("Player won " + playerWins + " games");
+            console.log("-------");
+            console.log(computerWins > playerWins ? "Computer wins" : "Player wins");
+        }
+
+        game();
+    </script>
+</body>
+
+</html>
